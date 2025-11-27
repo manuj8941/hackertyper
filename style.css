@@ -29,7 +29,7 @@ body
     opacity: 0.55;
 }
 
-/* slight overall glitchy feel on app */
+/* App container */
 #app
 {
     display: flex;
@@ -66,16 +66,48 @@ body
 #hud-panel
 {
     flex: 1.3;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-#code-title,
-#log-title,
-#hud-title
+/* Titles */
+.panel-title,
+.hud-title
 {
     font-size: 13px;
     letter-spacing: 2px;
     margin-bottom: 5px;
     color: #7cf7c7;
+}
+
+/* HUD sections */
+.hud-section
+{
+    border: 1px dashed rgba(0, 255, 144, 0.3);
+    padding: 4px;
+}
+
+.hud-body
+{
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 2px;
+}
+
+.hud-row
+{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(0, 255, 144, 0.25);
+    padding-bottom: 1px;
+}
+
+.hud-row span:last-child
+{
+    color: #e2ffe2;
 }
 
 /* Code display */
@@ -111,31 +143,7 @@ body
     text-shadow: 0 0 6px #ff1c1c;
 }
 
-/* HUD */
-#hud-body
-{
-    flex: 1;
-    font-size: 13px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    padding-top: 4px;
-}
-
-.hud-row
-{
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px dashed rgba(0, 255, 144, 0.25);
-    padding-bottom: 1px;
-}
-
-.hud-row span:last-child
-{
-    color: #e2ffe2;
-}
-
-/* Hint at bottom */
+/* Hint at bottom (currently unused) */
 #hint
 {
     position: fixed;
@@ -146,6 +154,7 @@ body
     font-size: 11px;
     color: #4cffc3;
     opacity: 0.7;
+    z-index: 10;
 }
 
 /* ACCESS overlay */
@@ -238,26 +247,171 @@ body
         box-shadow: 0 0 26px rgba(0, 255, 144, 0.9);
     }
 }
-/* Custom Neon Scrollbars */
+
+/* Scrollbar styling (neon) */
 #code-display::-webkit-scrollbar,
-#log-display::-webkit-scrollbar {
-  width: 4px;
+#log-display::-webkit-scrollbar
+{
+    width: 4px;
 }
 
 #code-display::-webkit-scrollbar-thumb,
-#log-display::-webkit-scrollbar-thumb {
-  background: #00ff90;
-  border-radius: 2px;
-  box-shadow: 0 0 6px #00ff90;
+#log-display::-webkit-scrollbar-thumb
+{
+    background: #00ff90;
+    border-radius: 2px;
+    box-shadow: 0 0 6px #00ff90;
 }
 
 #code-display::-webkit-scrollbar-track,
-#log-display::-webkit-scrollbar-track {
-  background: #03150f;
+#log-display::-webkit-scrollbar-track
+{
+    background: #03150f;
 }
 
 #code-display,
-#log-display {
-  scrollbar-width: thin;                /* Firefox */
-  scrollbar-color: #00ff90 #03150f;     /* thumb & track */
+#log-display
+{
+    scrollbar-width: thin;
+    scrollbar-color: #00ff90 #03150f;
+}
+
+/* Text flicker for random lines */
+.flicker
+{
+    animation: textFlicker 0.12s alternate 3;
+}
+
+@keyframes textFlicker
+{
+    0%
+    {
+        opacity: 0.2;
+    }
+
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+/* Pulse glow on the whole app */
+@keyframes pulseGlow
+{
+    0%
+    {
+        box-shadow: 0 0 8px #00ff90;
+    }
+
+    50%
+    {
+        box-shadow: 0 0 22px #00ff90;
+    }
+
+    100%
+    {
+        box-shadow: 0 0 8px #00ff90;
+    }
+}
+
+.pulse
+{
+    animation: pulseGlow 1s ease-out;
+}
+
+/* Sparks on typing */
+.spark
+{
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #00ff90;
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    box-shadow: 0 0 8px #00ff90;
+    animation: sparkFade 0.3s forwards;
+}
+
+@keyframes sparkFade
+{
+    to
+    {
+        transform: translateY(-8px) scale(0.3);
+        opacity: 0;
+    }
+}
+
+/* Boot screen */
+#boot-screen
+{
+    position: fixed;
+    inset: 0;
+    background: black;
+    color: #00ff90;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    letter-spacing: 4px;
+    z-index: 999;
+    animation: bootFade 2s forwards 2s;
+}
+
+@keyframes bootFade
+{
+    to
+    {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Device lock overlay for mobile/small screen */
+.device-overlay
+{
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #220000 0%, #000000 65%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+}
+
+.device-overlay.hidden
+{
+    display: none;
+}
+
+.device-message
+{
+    border: 2px solid #ff4444;
+    padding: 24px 30px;
+    max-width: 480px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 22px #ff0000;
+}
+
+.device-title
+{
+    font-size: 24px;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+    color: #ff6666;
+    text-transform: uppercase;
+}
+
+.device-body
+{
+    font-size: 14px;
+    line-height: 1.6;
+    color: #ffbaba;
+}
+
+.device-sub
+{
+    font-size: 12px;
+    opacity: 0.8;
 }

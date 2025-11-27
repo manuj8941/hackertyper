@@ -9,16 +9,31 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDBmZjkwIiB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbG5zPSJodHRwOi8vd3d3
+
+        <!-- Skull favicon -->
+        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDBmZjkwIiB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbG5zPSJodHRwOi8vd3d3
 LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI2IDl2MTFIMTZWOUgxMXYxMUg2VjlIMXYxOWg1djYgaDl2LTZoMTB2Nm
 g5di02aDVWOUgyNnoiLz48L3N2Zz4=">
-
-
 
         <link rel="stylesheet" href="style.css" />
     </head>
 
     <body>
+        <!-- Boot screen -->
+        <div id="boot-screen">BOOTING NEON-SABBATH KERNEL...</div>
+
+        <!-- Device lock overlay for mobiles / small screens -->
+        <div id="device-overlay" class="device-overlay hidden">
+            <div class="device-message">
+                <div class="device-title">UNAUTHORIZED TERMINAL</div>
+                <div class="device-body">
+                    This interface is calibrated for full-size neural consoles only.<br><br>
+                    Mobile / handheld nodes are quarantined by BLACKICE.<br>
+                    <span class="device-sub">Reconnect from a proper machine.</span>
+                </div>
+            </div>
+        </div>
+
         <!-- CRT scanline overlay -->
         <div id="crt-overlay"></div>
 
@@ -30,43 +45,97 @@ g5di02aDVWOUgyNnoiLz48L3N2Zz4=">
         <div id="app">
             <!-- Left: fake code window -->
             <div id="code-panel">
-                <div id="code-title">[ NEON-SABBATH WAREZ CORE ]</div>
+                <div class="panel-title">[ NEON-SABBATH WAREZ CORE ]</div>
                 <pre id="code-display"></pre>
             </div>
 
             <!-- Middle: log / terminal window -->
             <div id="log-panel">
-                <div id="log-title">[ GHOST TERMINAL ]</div>
+                <div class="panel-title">[ GHOST TERMINAL ]</div>
                 <div id="log-display"></div>
             </div>
 
-            <!-- Right: Status HUD -->
+            <!-- Right: Multi-section HUD -->
             <div id="hud-panel">
-                <div id="hud-title">[ STATUS HUD ]</div>
-                <div id="hud-body">
-                    <div class="hud-row">
-                        <span>CPU LOAD</span><span id="hud-cpu">37%</span>
+                <!-- Section 1: Status HUD -->
+                <div class="hud-section">
+                    <div class="hud-title">[ STATUS HUD ]</div>
+                    <div class="hud-body">
+                        <div class="hud-row">
+                            <span>CPU LOAD</span><span id="hud-cpu">37%</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>NET TRACE</span><span id="hud-trace">IDLE</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>BLACKICE</span><span id="hud-ice">BYPASSED</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>SESSION</span><span id="hud-session">00:00:00</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>GHOST IP</span><span id="hud-ip">0.0.0.0</span>
+                        </div>
                     </div>
-                    <div class="hud-row">
-                        <span>NET TRACE</span><span id="hud-trace">IDLE</span>
+                </div>
+
+                <!-- Section 2: System Metrics -->
+                <div class="hud-section">
+                    <div class="hud-title">[ SYSTEM METRICS ]</div>
+                    <div class="hud-body">
+                        <div class="hud-row">
+                            <span>CPU TEMP</span><span id="hud-temp">42°C</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>FAN RPM</span><span id="hud-fan">6660</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>CORE VOLT</span><span id="hud-volt">1.18V</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>GPU TEMP</span><span id="hud-gpu">39°C</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>VRM TEMP</span><span id="hud-vrm">48°C</span>
+                        </div>
                     </div>
-                    <div class="hud-row">
-                        <span>BLACKICE</span><span id="hud-ice">BYPASSED</span>
-                    </div>
-                    <div class="hud-row">
-                        <span>SESSION</span><span id="hud-session">00:00:00</span>
-                    </div>
-                    <div class="hud-row">
-                        <span>GHOST IP</span><span id="hud-ip">0.0.0.0</span>
+                </div>
+
+                <!-- Section 3: Crypto / Ritual State -->
+                <div class="hud-section">
+                    <div class="hud-title">[ CRYPTO STATE ]</div>
+                    <div class="hud-body">
+                        <div class="hud-row">
+                            <span>ENTROPY</span><span id="hud-entropy">0xAF13C9</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>SIGIL KEY</span><span id="hud-sigil">0xDEAD0C7E</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>SESSION TOKEN</span><span id="hud-token">0xC0FFEE</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>HASH ROLL</span><span id="hud-hash">0xB16B00B5</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>PRNG STATE</span><span id="hud-prng">CHAOTIC</span>
+                        </div>
+                        <div class="hud-row">
+                            <span>KEY ROTATION</span><span id="hud-keyrot">ACTIVE</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- <div id="hint">
-            Type anywhere to begin.
-            <br />Press <b>Alt+3</b> = ACCESS GRANTED, <b>Alt+4</b> = ACCESS DENIED, <b>Esc</b> to close.
-        </div> -->
+        <!-- Hint (kept commented to look cleaner) -->
+        <!--
+    <div id="hint">
+        Type anywhere to begin.
+        <br />Press <b>Alt+3</b> = ACCESS GRANTED, <b>Alt+4</b> = ACCESS DENIED, <b>Esc</b> to close.
+    </div>
+    -->
+
         <script src="sounds.js"></script>
         <script src="script.js"></script>
 
