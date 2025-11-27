@@ -388,10 +388,36 @@ body
 {
     border: 2px solid #ff4444;
     padding: 24px 30px;
-    max-width: 480px;
+    width: 100%;
+    max-width: 100%;
     text-align: center;
     background: rgba(0, 0, 0, 0.9);
     box-shadow: 0 0 22px #ff0000;
+    margin: 0 20px;
+    /* slight margin so text doesn't touch edges */
+    box-sizing: border-box;
+}
+@keyframes devicePulse
+{
+    0%
+    {
+        box-shadow: 0 0 14px #ff0000;
+    }
+
+    50%
+    {
+        box-shadow: 0 0 26px #ff4444;
+    }
+
+    100%
+    {
+        box-shadow: 0 0 14px #ff0000;
+    }
+}
+
+.device-message
+{
+    animation: devicePulse 2s infinite;
 }
 
 .device-title
