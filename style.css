@@ -238,3 +238,26 @@ body
         box-shadow: 0 0 26px rgba(0, 255, 144, 0.9);
     }
 }
+/* Custom Neon Scrollbars */
+#code-display::-webkit-scrollbar,
+#log-display::-webkit-scrollbar {
+  width: 4px;
+}
+
+#code-display::-webkit-scrollbar-thumb,
+#log-display::-webkit-scrollbar-thumb {
+  background: #00ff90;
+  border-radius: 2px;
+  box-shadow: 0 0 6px #00ff90;
+}
+
+#code-display::-webkit-scrollbar-track,
+#log-display::-webkit-scrollbar-track {
+  background: #03150f;
+}
+
+#code-display,
+#log-display {
+  scrollbar-width: thin;                /* Firefox */
+  scrollbar-color: #00ff90 #03150f;     /* thumb & track */
+}
