@@ -1,0 +1,221 @@
+/*************************************************************
+ *  ███ NEON-SABBATH KERNEL BREACH v0x13  (DO NOT DISTRIBUTE)
+ *  dumped from /dev/void by user: .\NULLPROPHET
+ *
+ *  STATUS: CORRUPTED • OCCULT • UNDOCUMENTED
+ *************************************************************/
+
+#define VX_SIGIL        0xDEAD0C7E      // virus sigil
+#define WAREZ_CHANNEL   0x31337         // ghost IRC port
+#define BLACKICE_LEVEL  0xF00D          // corporate defense tier
+#define ROOT_COVEN      0x0FF1CE        // "office" core cluster
+
+#define SEG_FAULT_ALTAR ((void*)0xBAADF00D)
+#define BLOOD_KEY       0xB16B00B5
+
+/* ███ forbidden opcodes scraped from abandoned BBS dumps ███ */
+unsigned char necro_shellcode[] = {
+    0x90, 0x90, 0x90,         // triple NO-OP prayer
+    0xEB, 0x13,               // short jump into the abyss
+    0xDE, 0xAD, 0xBE, 0xEF,   // sacrificial marker
+    0xCC, 0xCC, 0xCC,         // breakpoint stutter
+    0x66, 0x6F, 0x72, 0x6B,   // "fork" in ASCII, for fun
+    0x00
+};
+
+/* ██ blacksite config stitched from old warez .nfo files ██ */
+struct black_ops_profile {
+    char handle[16];
+    unsigned int access_level;
+    unsigned int trust_score;
+    unsigned long ghost_id;
+};
+
+struct black_ops_profile current_operative = {
+    .handle = "NEON_WARLOCK",
+    .access_level = 0x13,
+    .trust_score = 0x00,      // never trust anyone
+    .ghost_id = 0xC0FFEEUL
+};
+
+/* ██ low-level ritual registers ██ */
+register unsigned long r_shadow __asm__("r12");
+register unsigned long r_cipher __asm__("r13");
+register unsigned long r_totem  __asm__("r14");
+
+/* ███ ASSEMBLY: bootstrap the occult hypervisor ███ */
+__asm__ (
+    ".intel_syntax noprefix           \n"
+    "xor     rax, rax                 \n"
+    "mov     rbx, VX_SIGIL            \n"
+    "mov     rcx, ROOT_COVEN          \n"
+    "cpuid                            \n"   // ask the silicon who it serves
+    "xor     rax, rdx                 \n"
+    "mov     r_shadow, rax            \n"
+    "jmp     neon_sabbath_entry       \n"
+);
+
+/* ███ tap into deprecated military entropy daemon ███ */
+unsigned long siphon_milspec_entropy(void) {
+    unsigned long flux = 0x13370000;
+    __asm__ volatile(
+        "rdtsc                  \n"
+        "xor    %%rax, %%rdx    \n"
+        "ror    %%rax, 7        \n"
+        "add    %0, %%rax       \n"
+        : "+r"(flux)
+        :
+        : "rax", "rdx"
+    );
+    flux ^= 0xFEEDFACE;
+    flux ^= BLACKICE_LEVEL;
+    return flux;
+}
+
+/* ███ corrupt the kernel stack with sigil noise ███ */
+void smear_sigil_noise(void *base, unsigned int span) {
+    unsigned char *p = (unsigned char*)base;
+    for(unsigned int i = 0; i < span; ++i) {
+        p[i] ^= (unsigned char)((i * 0x13) ^ 0x66);
+    }
+}
+
+/* ███ underground covenant handshake emulator ███ */
+int perform_coven_handshake(struct black_ops_profile *p, unsigned long seed) {
+    int rites = 7 + (seed & 0xF); // random number of rituals
+    int trust = 0;
+
+    for(int i = 0; i < rites; ++i) {
+        __asm__ volatile(
+            "xor    %0, %1        \n"
+            "rol    %0, 3         \n"
+            : "+r"(seed)
+            : "r"(VX_SIGIL)
+        );
+        trust ^= (int)(seed & 0xFF);
+    }
+
+    p->trust_score = (trust ^ BLOOD_KEY) & 0xFFFF;
+    return p->trust_score;
+}
+
+/* ███ ghost-IRC backdoor (retro 90s BBS vibes) ███ */
+int dial_ghost_channel(unsigned short port) {
+    // this is not real networking, just ritualistic noise
+    unsigned long dialtone = 0;
+
+    __asm__ volatile(
+        "mov    %%ax, %1       \n"
+        "shl    %%eax, 13      \n"
+        "xor    %%eax, 0xDEAD  \n"
+        "add    %0, %%rax      \n"
+        : "+r"(dialtone)
+        : "r"(port)
+        : "rax"
+    );
+
+    // pretend success if we hit a lucky harmonic
+    return (dialtone & 0xFF) == 0x37;
+}
+
+/* ███ corrupt opcode seance ███ */
+void summon_corrupted_opcodes(void) {
+    for (int i = 0; necro_shellcode[i] != 0x00; ++i) {
+        __asm__ volatile(
+            "mov    al, %0       \n"
+            "out    0x66, al     \n"  // broadcast weirdness on port 0x66
+            :
+            : "r"(necro_shellcode[i])
+            : "al"
+        );
+    }
+}
+
+/* ███ deep memory séance: walk forbidden pages ███ */
+void *walk_forbidden_memory(unsigned long anchor) {
+    unsigned long *ptr = (unsigned long*)anchor;
+    unsigned long steps = 0x23;
+
+    while (steps--) {
+        // each step corrupts the pointer slightly more
+        __asm__ volatile(
+            "ror    %0, 5        \n"
+            "xor    %0, 0xBADC0DE\n"
+            : "+r"(ptr)
+        );
+    }
+
+    return (void*)ptr;
+}
+
+/* ███ terminal banner: old-school 90s style ███ */
+void print_neon_banner() {
+    const char *banner =
+        "\n"
+        "   [ NEON-SABBATH WAREZ CORE ]\n"
+        "   [ cracked by: NEON_WARLOCK / NULLPROPHET CREW ]\n"
+        "   [ distro: /pub/0day/milspec/ghostsys ]\n"
+        "   [ status: UNSTABLE • UNSIGNED • UNHOLY ]\n\n";
+
+    // pretend low-level TTY out
+    for (const char *p = banner; *p; ++p) {
+        __asm__ volatile(
+            "mov    al, %0       \n"
+            "out    0xE9, al     \n"  // classic Bochs debug port for retro feel
+            :
+            : "r"(*p)
+            : "al"
+        );
+    }
+}
+
+/* ███ main ritual loop ███ */
+int main(void) {
+    unsigned long entropy = siphon_milspec_entropy();
+    r_cipher = entropy ^ VX_SIGIL;
+    r_totem  = (unsigned long)&current_operative;
+
+    print_neon_banner();
+
+    // prepare calling the covenant
+    int covenant_trust = perform_coven_handshake(&current_operative, entropy);
+
+    if (covenant_trust == 0) {
+        // no one is worthy; trigger silent failure
+        __asm__ volatile("hlt; cli;");
+        return -1;
+    }
+
+    // smear sigil noise across a fake stack altar
+    smear_sigil_noise(SEG_FAULT_ALTAR, 0x40);
+
+    // attempt ghost-IRC link to warez channel
+    int linked = dial_ghost_channel(WAREZ_CHANNEL);
+
+    if (linked) {
+        summon_corrupted_opcodes();
+        void *forbidden = walk_forbidden_memory((unsigned long)SEG_FAULT_ALTAR);
+
+        // jump into the void (purely symbolic, obviously)
+        __asm__ volatile(
+            "mov    rax, %0      \n"
+            "jmp    rax          \n"
+            :
+            : "r"(forbidden)
+            : "rax"
+        );
+    } else {
+        // fallback: loop in a cursed idle state
+        while (1) {
+            __asm__ volatile(
+                "nop                 \n"
+                "nop                 \n"
+                "jmp .-2             \n" // spin in a tiny temporal prison
+            );
+        }
+    }
+
+    return ROOT_COVEN;
+}
+
+/* EOF // dumped 03:33:13 from /dev/oblivion */

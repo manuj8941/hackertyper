@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Neon Hacker Console</title>
+
+        <!-- 80s hacker font from Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDBmZjkwIiB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbG5zPSJodHRwOi8vd3d3
+LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTI2IDl2MTFIMTZWOUgxMXYxMUg2VjlIMXYxOWg1djYgaDl2LTZoMTB2Nm
+g5di02aDVWOUgyNnoiLz48L3N2Zz4=">
+
+
+
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+        <!-- CRT scanline overlay -->
+        <div id="crt-overlay"></div>
+
+        <!-- ACCESS overlays -->
+        <div id="overlay" class="overlay hidden">
+            <div id="overlay-text"></div>
+        </div>
+
+        <div id="app">
+            <!-- Left: fake code window -->
+            <div id="code-panel">
+                <div id="code-title">[ NEON-SABBATH WAREZ CORE ]</div>
+                <pre id="code-display"></pre>
+            </div>
+
+            <!-- Middle: log / terminal window -->
+            <div id="log-panel">
+                <div id="log-title">[ GHOST TERMINAL ]</div>
+                <div id="log-display"></div>
+            </div>
+
+            <!-- Right: Status HUD -->
+            <div id="hud-panel">
+                <div id="hud-title">[ STATUS HUD ]</div>
+                <div id="hud-body">
+                    <div class="hud-row">
+                        <span>CPU LOAD</span><span id="hud-cpu">37%</span>
+                    </div>
+                    <div class="hud-row">
+                        <span>NET TRACE</span><span id="hud-trace">IDLE</span>
+                    </div>
+                    <div class="hud-row">
+                        <span>BLACKICE</span><span id="hud-ice">BYPASSED</span>
+                    </div>
+                    <div class="hud-row">
+                        <span>SESSION</span><span id="hud-session">00:00:00</span>
+                    </div>
+                    <div class="hud-row">
+                        <span>GHOST IP</span><span id="hud-ip">0.0.0.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="hint">
+            Type anywhere to begin.
+            <br />Press <b>Alt+3</b> = ACCESS GRANTED, <b>Alt+4</b> = ACCESS DENIED, <b>Esc</b> to close.
+        </div> -->
+        <script src="sounds.js"></script>
+        <script src="script.js"></script>
+
+    </body>
+
+</html>

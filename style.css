@@ -1,0 +1,240 @@
+*
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    background: #020303;
+    color: #00ff90;
+    font-family: "VT323", "Lucida Console", monospace;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* CRT overlay: scanlines + slight vignette */
+#crt-overlay
+{
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.25) 50%,
+            rgba(0, 0, 0, 0.35) 50%);
+    background-size: 100% 2px;
+    mix-blend-mode: soft-light;
+    opacity: 0.55;
+}
+
+/* slight overall glitchy feel on app */
+#app
+{
+    display: flex;
+    height: 100vh;
+    padding: 10px;
+    gap: 10px;
+    text-shadow: 0 0 4px #00ff90;
+    filter: contrast(1.1);
+}
+
+/* Panels */
+#code-panel,
+#log-panel,
+#hud-panel
+{
+    border: 1px solid #00ff90;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle at top, #04130e 0%, #020605 60%, #010202 100%);
+    box-shadow: 0 0 12px rgba(0, 255, 144, 0.15);
+}
+
+#code-panel
+{
+    flex: 3;
+}
+
+#log-panel
+{
+    flex: 2;
+}
+
+#hud-panel
+{
+    flex: 1.3;
+}
+
+#code-title,
+#log-title,
+#hud-title
+{
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: #7cf7c7;
+}
+
+/* Code display */
+#code-display
+{
+    flex: 1;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    padding-right: 8px;
+    font-size: 15px;
+    line-height: 1.2;
+}
+
+/* Logs */
+#log-display
+{
+    flex: 1;
+    overflow-y: auto;
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+#log-display .line
+{
+    white-space: pre;
+    margin-bottom: 2px;
+}
+
+/* Highlight ALERT lines in red */
+#log-display .line.alert
+{
+    color: #ff4c4c;
+    text-shadow: 0 0 6px #ff1c1c;
+}
+
+/* HUD */
+#hud-body
+{
+    flex: 1;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 4px;
+}
+
+.hud-row
+{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed rgba(0, 255, 144, 0.25);
+    padding-bottom: 1px;
+}
+
+.hud-row span:last-child
+{
+    color: #e2ffe2;
+}
+
+/* Hint at bottom */
+#hint
+{
+    position: fixed;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 11px;
+    color: #4cffc3;
+    opacity: 0.7;
+}
+
+/* ACCESS overlay */
+.overlay
+{
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.overlay.hidden
+{
+    display: none;
+}
+
+#overlay-text
+{
+    font-size: 52px;
+    letter-spacing: 8px;
+    padding: 30px 40px;
+    border: 2px solid #00ff90;
+    text-transform: uppercase;
+    animation: overlay-glitch 0.18s infinite, overlay-pulse 2s infinite;
+}
+
+/* ACCESS GRANTED / DENIED colors */
+.overlay.granted #overlay-text
+{
+    color: #00ff90;
+    text-shadow: 0 0 16px #00ff90;
+    border-color: #00ff90;
+}
+
+.overlay.denied #overlay-text
+{
+    color: #ff4444;
+    text-shadow: 0 0 16px #ff4444;
+    border-color: #ff4444;
+}
+
+/* Glitch animation */
+@keyframes overlay-glitch
+{
+    0%
+    {
+        transform: translate(0, 0);
+    }
+
+    20%
+    {
+        transform: translate(-2px, 1px);
+    }
+
+    40%
+    {
+        transform: translate(2px, -1px);
+    }
+
+    60%
+    {
+        transform: translate(-1px, -2px);
+    }
+
+    80%
+    {
+        transform: translate(1px, 2px);
+    }
+
+    100%
+    {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes overlay-pulse
+{
+
+    0%,
+    100%
+    {
+        box-shadow: 0 0 12px rgba(0, 255, 144, 0.4);
+    }
+
+    50%
+    {
+        box-shadow: 0 0 26px rgba(0, 255, 144, 0.9);
+    }
+}
